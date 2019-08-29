@@ -1,41 +1,29 @@
 class Solution:
     def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
-        
-        #tomar los valores para resolver el problema
-        dias= N
-        
-        f=0
-        while f < dias:
-            #creamos un nuevo arreglo donde guardaremos la respuesta correcta
-            
+
+        #Creacion de la secuencia de repeticion
+        while N>0:
+
+            #Se crea arreglo donde se almacenara respues y se agrega el primer valor para la primera celda en la fila
             resu=[]
-            #no olvidar que estaremos poniendo en la primera y ultima posicion del
-            #arreglo los valores 0
             resu.append(0)
-            
-            #iniciamos el proceso en la posicion 1 del arreglo, donde podremos movernos
-            #a la derecha y a la izquierda.
-            i = 1
-            rango = 7
-            
-            #se evaluan las posiciones con un while
-            while i < rango: 
-                prev = cells[i-1]
-                sigu = cells[i+1]
-                #validamos los valores y el resultado se guarda en una varible temporal
-                if prev == sigu:
-                    temp=0
-                else:
-                    temp=1
-                    
-                #agregamos los resultados al nuevo arreglo
+             
+            #usamos el forma para movernos dentro del arreglo
+            for i in range (1,7):
+                #se evalua las referencia de las celdas y se guarda en variable temporal
+                temp =1 if cells[i-1] == cells[i+1] else 0
+                #se guarda los resultados en el nuevo arreglo de respuesta
                 resu.append(temp)
+                #Avanzar al siguiente punto del arreglo
                 i += 1
-            
-            #colocamos el valor de la ultima celda
+            #agregar el ultimo valor de la fila    
             resu.append(0)
+            #guardar todo la informacion en la variable de resultado que mostraremos...usaremos de nuevo cells, pero este paso se puede omitir
             cells = resu
-            f+=1
+            #Se hace reduce los valores para evitar repetir los ciclos y mejorar el codigo
+            N=(N-1)%14
+                        
+        return cells;
                        
         
-        return cells;
+        
